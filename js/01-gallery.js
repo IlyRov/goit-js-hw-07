@@ -31,5 +31,15 @@ galleryList.addEventListener('click', event => {
     `);
 
     instance.show();
+
+    // Listen for Escape key press
+    const closeOnEscape = event => {
+      if (event.key === 'Escape') {
+        instance.close();
+        window.removeEventListener('keydown', closeOnEscape);
+      }
+    };
+
+    window.addEventListener('keydown', closeOnEscape);
   }
 });

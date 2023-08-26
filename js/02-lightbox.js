@@ -1,3 +1,4 @@
+// js/02-lightbox.js
 import { galleryItems } from './gallery-items.js';
 
 const galleryList = document.querySelector('.gallery');
@@ -8,7 +9,6 @@ const createGalleryItem = ({ preview, original, description }) => `
       <img
         class="gallery__image"
         src="${preview}"
-        data-source="${original}"
         alt="${description}"
       />
     </a>
@@ -18,13 +18,11 @@ const createGalleryItem = ({ preview, original, description }) => `
 const galleryMarkup = galleryItems.map(createGalleryItem).join('');
 galleryList.insertAdjacentHTML('beforeend', galleryMarkup);
 
-// Initialize SimpleLightbox
-import SimpleLightbox from 'simplelightbox';
-import 'simplelightbox/dist/simple-lightbox.min.css';
 
-document.addEventListener('DOMContentLoaded', () => {
-  const lightbox = new SimpleLightbox('.gallery a', {
-    captionsData: 'alt',
-    captionDelay: 250,
-  });
+
+const lightbox = new SimpleLightbox('.gallery a', {
+  captions: true, // This enables captions
+  captionDelay: 250,
+  captionSelector: "img",
+  captionType: "attr",
 });
